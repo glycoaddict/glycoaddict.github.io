@@ -1,7 +1,94 @@
-<html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  </head>
   <body>
-    // a href link to index.html in kids/interactive
-    <a href="kids/interactive/index.html">Easter 2023</a>
+    <div id="content" class="container"></div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <!-- EDIT THESE ITEMS BELOW THIS LINE -->
+
+    <script>
+      // header
+      const h = "King of God's Kingdom Part 3, Lesson 3";
+      // question and answer; use the `delimQna` to separate the question from the answer and `delimAs` within the answer to separate the different list items
+      const qna = [
+        `Recap 1#~#<img src="https://scontent.fsin7-1.fna.fbcdn.net/v/t1.6435-9/186515178_4320104004707567_8274926300702772277_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=HXswAOrFdFgAX9tFSDc&_nc_ht=scontent.fsin7-1.fna&oh=00_AfD-SLTWt01HW0IOyj32ShrduViA8aBN3PizjHo2XyQXCA&oe=64FA8F02">`,
+        `Recap 2#~#<img src="https://2.bp.blogspot.com/-8tqn1Ym2cHk/WXIXKvOyNHI/AAAAAAAAE38/uUpiGeU6ZykykmgivP5pEwZ-s6ufsjL1QCKgBGAs/s640/Titian_Transfiguration_c1560_SanSalvador.jpg">`,
+        `Slides#~#<a href="https://docs.google.com/presentation/d/1ajj8JpDALjORWr6_y_6GSLwftF9osYyMjlLycbhjlcE/edit?usp=sharing">Link to slides</a>`,
+        `Passage#~#<a href="https://www.biblegateway.com/passage/?search=Mark%2010%3A13-31&version=NIV">link to passage</a>,        
+      ];
+
+      // process items
+      var hContent = "<title>" + h + "</title><h1>" + h + "</h1>"
+
+      // some consts
+      const buttonOptions = ["primary", "success", "danger", "warning", "info", "dark"];
+      const delimQna = "#~#";
+      const delimAs = "@";
+      
+      var i = 0;
+      
+      // split items 
+      var qnaContent = ``
+      for (qnaItem of qna) {
+        let qnaSplit = qnaItem.split(delimQna);
+        let qnaQuestion = qnaSplit[0];
+        // handles when there is no answer to the question
+        let qnaAnswers = []
+        if (qnaSplit.length > 1) {
+          qnaAnswers = qnaSplit[1].split(delimAs);
+        }
+        let qnaAnswersCode = ""
+        
+        for (qnaAnswer of qnaAnswers) {
+          qnaAnswersCode = qnaAnswersCode + `<li>` + qnaAnswer + `</li>`;
+        }
+        qnaAnswersCode = `<ol>` + qnaAnswersCode + `</ol>`;
+
+        let iString = i.toString();
+        
+        qnaContent = qnaContent + `<p>
+          <button class="btn btn-` + buttonOptions[i % buttonOptions.length] + `" type="button" data-toggle="collapse" data-target="#collapse` + iString + `" aria-expanded="false" aria-controls="collapse` + iString + `">
+            <div style="white-space:normal;">` + qnaQuestion + `</div></button>
+            <div class="collapse" id="collapse` + iString + `">
+              <div class="card card-body">` + qnaAnswersCode + `</div>
+              </div>
+              </p>
+          `
+          i++;
+  }
+
+      // script proper
+      const htmlContent = hContent + qnaContent;
+
+      window.addEventListener("load", function () {
+        document.getElementById("content").innerHTML = htmlContent;
+      })
+
+      
+
+
+
+
+    </script>
     
+
   </body>
 </html>
+  
+
+
